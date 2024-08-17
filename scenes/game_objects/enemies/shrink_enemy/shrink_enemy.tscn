@@ -1,0 +1,42 @@
+[gd_scene load_steps=8 format=3 uid="uid://btpcoxsfqg3g"]
+
+[ext_resource type="Script" path="res://scenes/game_objects/enemies/shrink_enemy/shrink_enemy.gd" id="1_ggyhw"]
+[ext_resource type="Texture2D" uid="uid://bi00nkvh86kxq" path="res://scenes/game_objects/enemies/grow_enemy/grow_enemy.png" id="1_x55ut"]
+[ext_resource type="PackedScene" uid="uid://cbeccdmhmd036" path="res://scenes/components/health_component.tscn" id="2_7u040"]
+[ext_resource type="PackedScene" uid="uid://drgw7r5qw8odk" path="res://scenes/components/hurtbox_component.tscn" id="2_n7abw"]
+[ext_resource type="PackedScene" uid="uid://dnuv14ve06frl" path="res://scenes/components/size_change_component.tscn" id="3_j8a5l"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7rpfh"]
+radius = 9.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_x7dhd"]
+radius = 7.0
+
+[node name="ShrinkEnemy" type="CharacterBody2D"]
+collision_layer = 8
+collision_mask = 9
+script = ExtResource("1_ggyhw")
+
+[node name="HealthComponent" parent="." instance=ExtResource("2_7u040")]
+
+[node name="SizeChangeComponent" parent="." node_paths=PackedStringArray("health_component", "body") instance=ExtResource("3_j8a5l")]
+health_component = NodePath("../HealthComponent")
+body = NodePath("..")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0, 1, 1, 1)
+position = Vector2(0, -8)
+texture = ExtResource("1_x55ut")
+
+[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("2_n7abw")]
+collision_layer = 0
+collision_mask = 4
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+position = Vector2(0, -7)
+shape = SubResource("CircleShape2D_7rpfh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -7)
+shape = SubResource("CircleShape2D_x7dhd")

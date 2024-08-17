@@ -1,0 +1,41 @@
+[gd_scene load_steps=8 format=3 uid="uid://b75yljnmuyp4w"]
+
+[ext_resource type="Script" path="res://scenes/game_objects/player/player.gd" id="1_adj6w"]
+[ext_resource type="Texture2D" uid="uid://dymxuqsnkvkk0" path="res://scenes/game_objects/player/player.png" id="1_dhcu0"]
+[ext_resource type="PackedScene" uid="uid://cbeccdmhmd036" path="res://scenes/components/health_component.tscn" id="2_7r84e"]
+[ext_resource type="PackedScene" uid="uid://dnuv14ve06frl" path="res://scenes/components/size_change_component.tscn" id="3_ksy62"]
+[ext_resource type="PackedScene" uid="uid://dajok706v7nlp" path="res://scenes/components/hitbox_component.tscn" id="4_7qlta"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_umx87"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_b87xt"]
+radius = 12.0
+
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+position = Vector2(0, -12)
+collision_layer = 0
+script = ExtResource("1_adj6w")
+
+[node name="HealthComponent" parent="." groups=["player"] instance=ExtResource("2_7r84e")]
+
+[node name="SizeChangeComponent" parent="." node_paths=PackedStringArray("health_component", "body") instance=ExtResource("3_ksy62")]
+health_component = NodePath("../HealthComponent")
+body = NodePath("..")
+
+[node name="HitIntervalTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Visuals" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Visuals"]
+texture = ExtResource("1_dhcu0")
+
+[node name="HitboxComponent" parent="." instance=ExtResource("4_7qlta")]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+shape = SubResource("CircleShape2D_umx87")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_b87xt")

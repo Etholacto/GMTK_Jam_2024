@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dnuv14ve06frl"]
+
+[ext_resource type="Script" path="res://SizeChange.gd" id="1_q5quq"]
+
+[node name="SizeChangeComponent" type="Node"]
+script = ExtResource("1_q5quq")

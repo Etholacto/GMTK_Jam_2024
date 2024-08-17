@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://b5olb3s4jspme"]
+
+[ext_resource type="Script" path="res://scenes/ui/sound_button.gd" id="1_kygr4"]
+
+[node name="SoundButton" type="Button"]
+offset_right = 115.0
+offset_bottom = 31.0
+text = "Sound Button"
+script = ExtResource("1_kygr4")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
