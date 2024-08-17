@@ -1,12 +1,14 @@
 extends Node
 
 @export var end_screen_scene: PackedScene
+@export var victory_area: VictoryArea
 
 var pause_menu_scene = preload("res://scenes/ui/pause_menu.tscn")
 
 
 func _ready():
 	$%Player.health_component.died.connect(on_player_died)
+	$VictoryArea.area_entered.connect(on_area_entered)
 	
 
 func _unhandled_input(event):
@@ -18,3 +20,11 @@ func on_player_died(defeat_type: String):
 	var end_screen_instance = end_screen_scene.instantiate()
 	add_child(end_screen_instance)
 	end_screen_instance.set_defeat(defeat_type)
+
+func on_area_entered(other_area: Area2D):
+	print("victory")
+	if not other_area is HitboxComponent:
+		return
+	
+	var end_screen_instance = end_screen_scene.instantiate()
+	add_child(end_screen_instance)
