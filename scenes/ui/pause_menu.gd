@@ -13,7 +13,7 @@ func _ready():
 	$%OptionsButton.pressed.connect(on_options_pressed)
 	$%QuitButton.pressed.connect(on_quit_pressed)
 	
-	#$AnimationPlayer.play("default")
+	$AnimationPlayer.play("default")
 	
 	var tween = create_tween()
 	tween.tween_property(panel_container, "scale", Vector2.ZERO, 0)

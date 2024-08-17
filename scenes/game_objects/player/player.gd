@@ -12,12 +12,13 @@ const FALL_GRAVITY := 1500
 @onready var hit_interval_timer = $HitIntervalTimer
 @onready var visuals = $Visuals
 @onready var start_scale: Vector2 = -visuals.scale
+@onready var grow_audio_player = $GrowAudioPlayer
+@onready var shrink_audio_player = $ShrinkAudioPlayer
 
 var should_change_size: bool = true
 
 func _ready():
 	GameEvents.hit_enemy_of_type.connect(on_enemy_hit)
-	health_component.health_changed.connect(on_health_changed)
 	hit_interval_timer.timeout.connect(on_timer_timeout)
 	
 	size_change_component.change_size()
@@ -63,8 +64,10 @@ func on_enemy_hit(enemy_health: HealthComponent, enemy_type: String):
 	if enemy_health.current_health <= health_component.current_health and should_change_size:
 		if enemy_type == "growth_type_enemy":
 			health_component.healing(1)
+			grow_audio_player.play()
 		if enemy_type == "shrink_type_enemy":
 			health_component.damage(1)
+			shrink_audio_player.play()
 		size_change_component.change_size()
 		enemy_health.damage(100)
 		hit_interval_timer.start()

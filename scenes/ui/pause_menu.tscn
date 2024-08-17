@@ -1,10 +1,63 @@
-[gd_scene load_steps=3 format=3 uid="uid://clcfkc1kylwr5"]
+[gd_scene load_steps=6 format=3 uid="uid://clcfkc1kylwr5"]
 
 [ext_resource type="Script" path="res://scenes/ui/pause_menu.gd" id="1_suh16"]
 [ext_resource type="PackedScene" uid="uid://b5olb3s4jspme" path="res://scenes/ui/sound_button.tscn" id="1_wcaw4"]
 
+[sub_resource type="Animation" id="Animation_dbfcr"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_brvb6"]
+resource_name = "default"
+length = 0.15
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6v4ny"]
+_data = {
+"RESET": SubResource("Animation_dbfcr"),
+"default": SubResource("Animation_brvb6")
+}
+
 [node name="PauseMenu" type="CanvasLayer"]
+process_mode = 3
 script = ExtResource("1_suh16")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+process_mode = 3
+libraries = {
+"": SubResource("AnimationLibrary_6v4ny")
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.262745, 0.290196, 0.372549, 0.498039)
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchors_preset = 15

@@ -1,10 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://b75yljnmuyp4w"]
+[gd_scene load_steps=10 format=3 uid="uid://b75yljnmuyp4w"]
 
 [ext_resource type="Script" path="res://scenes/game_objects/player/player.gd" id="1_adj6w"]
 [ext_resource type="Texture2D" uid="uid://dymxuqsnkvkk0" path="res://scenes/game_objects/player/player.png" id="1_dhcu0"]
 [ext_resource type="PackedScene" uid="uid://cbeccdmhmd036" path="res://scenes/components/health_component.tscn" id="2_7r84e"]
 [ext_resource type="PackedScene" uid="uid://dnuv14ve06frl" path="res://scenes/components/size_change_component.tscn" id="3_ksy62"]
 [ext_resource type="PackedScene" uid="uid://dajok706v7nlp" path="res://scenes/components/hitbox_component.tscn" id="4_7qlta"]
+[ext_resource type="AudioStream" uid="uid://qktfm3tdeq3p" path="res://assets/audio/grow_shrink/grow.ogg" id="6_nwpso"]
+[ext_resource type="AudioStream" uid="uid://dtb17xipupc8w" path="res://assets/audio/grow_shrink/shrink.ogg" id="7_n3e7c"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_umx87"]
 
@@ -21,6 +23,12 @@ script = ExtResource("1_adj6w")
 [node name="SizeChangeComponent" parent="." node_paths=PackedStringArray("health_component", "body") instance=ExtResource("3_ksy62")]
 health_component = NodePath("../HealthComponent")
 body = NodePath("..")
+
+[node name="GrowAudioPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_nwpso")
+
+[node name="ShrinkAudioPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_n3e7c")
 
 [node name="HitIntervalTimer" type="Timer" parent="."]
 one_shot = true

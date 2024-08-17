@@ -6,5 +6,4 @@ func _ready():
 	
 	
 func on_pressed():
-	pass
-	#$RandomStreamPlayerComponent.play_random()
+	$AudioStreamPlayer.play()
