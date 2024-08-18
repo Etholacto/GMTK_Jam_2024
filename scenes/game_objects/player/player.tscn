@@ -26,9 +26,13 @@ body = NodePath("..")
 
 [node name="GrowAudioPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_nwpso")
+volume_db = 5.0
+bus = &"sfx"
 
 [node name="ShrinkAudioPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_n3e7c")
+volume_db = 5.0
+bus = &"sfx"
 
 [node name="HitIntervalTimer" type="Timer" parent="."]
 one_shot = true

@@ -36,21 +36,21 @@ size = Vector2(0, 0)
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_dnjn2"]
 size = Vector2(0, 0)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5nqj4"]
-bg_color = Color(0.623346, 0.647288, 0.74107, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vk7xl"]
+bg_color = Color(0.858808, 0.878843, 0.902281, 1)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gb7wn"]
-bg_color = Color(0.623346, 0.647288, 0.74107, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_myc5d"]
+bg_color = Color(0.858808, 0.878843, 0.902281, 1)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1txwd"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jdapa"]
 content_margin_left = 2.0
 content_margin_top = 6.0
 content_margin_right = 2.0
@@ -78,9 +78,10 @@ Button/styles/normal = SubResource("StyleBoxTexture_rtgxq")
 Button/styles/pressed = SubResource("StyleBoxTexture_j6t80")
 HSlider/icons/grabber = SubResource("PlaceholderTexture2D_baint")
 HSlider/icons/grabber_highlight = SubResource("PlaceholderTexture2D_dnjn2")
-HSlider/styles/grabber_area = SubResource("StyleBoxFlat_5nqj4")
-HSlider/styles/grabber_area_highlight = SubResource("StyleBoxFlat_gb7wn")
-HSlider/styles/slider = SubResource("StyleBoxFlat_1txwd")
+HSlider/styles/grabber_area = SubResource("StyleBoxFlat_vk7xl")
+HSlider/styles/grabber_area_highlight = SubResource("StyleBoxFlat_myc5d")
+HSlider/styles/slider = SubResource("StyleBoxFlat_jdapa")
+Label/colors/font_color = Color(0.874449, 0.874449, 0.874449, 1)
 Label/colors/font_outline_color = Color(0.262821, 0.290166, 0.372244, 1)
 Label/colors/font_shadow_color = Color(0.262821, 0.290166, 0.372244, 1)
 Label/constants/line_spacing = 2

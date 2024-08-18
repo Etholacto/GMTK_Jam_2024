@@ -3,7 +3,6 @@ extends CharacterBody2D
 const SPEED := 130
 const ACCELERATION := 800
 const FRICTION := 1000
-const JUMP_VELOCITY := -400
 const GRAVITY := 1000
 const FALL_GRAVITY := 1500
 
@@ -15,6 +14,8 @@ const FALL_GRAVITY := 1500
 @onready var grow_audio_player = $GrowAudioPlayer
 @onready var shrink_audio_player = $ShrinkAudioPlayer
 
+var jump_height := -400
+var jump_speed := 130
 var should_change_size: bool = true
 
 func _ready():
@@ -32,13 +33,15 @@ func player_movement(delta):
 		velocity.y += get_gravity(velocity) * delta
 		
 	if Input.is_action_just_released("jump") and velocity.y < 0:
-		velocity.y = JUMP_VELOCITY/4
+		velocity.y = jump_height/4
 		
 	if Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
+		velocity.y = jump_height
 	
 	var direction = Input.get_axis("move_left", "move_right")
-	if direction:
+	if direction and !is_on_floor():
+		velocity.x = move_toward(velocity.x, direction * jump_speed, ACCELERATION * delta)
+	elif direction:
 		velocity.x = move_toward(velocity.x, direction * SPEED, ACCELERATION * delta)
 	else:
 		velocity.x = move_toward(velocity.x, 0, FRICTION * delta)
@@ -54,6 +57,20 @@ func get_gravity(velocity: Vector2):
 		return GRAVITY
 	return FALL_GRAVITY
 	
+
+func change_jump_to_size(type: String):
+	if type == "grow":
+		if jump_height == -400:
+			jump_speed += 50
+		if jump_height < -400:
+			jump_height += 100
+	if type == "shrink":
+		if jump_speed == 130:
+			jump_height -= 100
+		if  jump_speed > 130:
+			jump_speed -= 50
+	
+	
 func on_health_changed():
 	GameEvents.emit_player_damaged()
 	
@@ -65,9 +82,11 @@ func on_enemy_hit(enemy_health: HealthComponent, enemy_type: String):
 		if enemy_type == "growth_type_enemy":
 			health_component.healing(1)
 			grow_audio_player.play()
+			change_jump_to_size("grow")
 		if enemy_type == "shrink_type_enemy":
 			health_component.damage(1)
 			shrink_audio_player.play()
+			change_jump_to_size("shrink")
 		size_change_component.change_size()
 		enemy_health.damage(100)
 		hit_interval_timer.start()

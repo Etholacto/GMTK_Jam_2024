@@ -11,3 +11,4 @@ script = ExtResource("1_kygr4")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_l3gms")
+bus = &"sfx"

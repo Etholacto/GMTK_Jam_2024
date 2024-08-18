@@ -6,9 +6,9 @@
 [node name="MusicPlayer" type="AudioStreamPlayer"]
 process_mode = 3
 stream = ExtResource("1_gsggs")
-volume_db = -10.0
+volume_db = -15.0
 autoplay = true
-bus = &"Music"
+bus = &"music"
 script = ExtResource("2_ag8wu")
 
 [node name="Timer" type="Timer" parent="."]

@@ -2,18 +2,18 @@ extends CanvasLayer
 
 signal back_pressed
 
-@onready var sfx_slider = %SFXSlider
-@onready var music_slider = %MusicSlider
+@onready var sfx_slider = $%SfxSlider
+@onready var music_slider = $%MusicSlider
 @onready var back_button = $%BackButton
 
 func _ready():
 	back_button.pressed.connect(on_back_pressed)
 	sfx_slider.value_changed.connect(on_audio_slider_changed.bind("sfx"))
 	music_slider.value_changed.connect(on_audio_slider_changed.bind("music"))
-	update_display()
+	update_information()
 
 
-func update_display():
+func update_information():
 	sfx_slider.value = get_bus_volume_percent("sfx")
 	music_slider.value = get_bus_volume_percent("music")
 
