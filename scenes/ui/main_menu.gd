@@ -11,7 +11,7 @@ func _ready():
 	
 	
 func on_play_pressed():
-	get_tree().change_scene_to_file("res://scenes/levels/main/main.tscn")
+	get_tree().change_scene_to_file("res://scenes/levels/level1/main.tscn")
 
 
 func on_level_select_pressed():

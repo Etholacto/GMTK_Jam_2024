@@ -4,8 +4,9 @@
 [ext_resource type="Script" path="res://scenes/game_objects/enemies/enemy_path.gd" id="1_ky87j"]
 
 [sub_resource type="Curve2D" id="Curve2D_h3ypg"]
+resource_local_to_scene = true
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 0, 0, -6.14222, -0.202225, 6.14222, 0.202225, 82, 0)
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, -6.14222, -0.202225, 6.14222, 0.202225, 133, -1)
 }
 point_count = 2
 
@@ -13,7 +14,9 @@ point_count = 2
 position = Vector2(338, 170)
 curve = SubResource("Curve2D_h3ypg")
 script = ExtResource("1_ky87j")
+enemy_health = null
 
 [node name="PathFollow2D" type="PathFollow2D" parent="." node_paths=PackedStringArray("enemy_path")]
+rotation = -0.00751866
 script = ExtResource("1_a2h0w")
 enemy_path = NodePath("..")

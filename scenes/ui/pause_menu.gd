@@ -10,6 +10,7 @@ func _ready():
 	panel_container.pivot_offset = panel_container.size / 2
 	 
 	$%ResumeButton.pressed.connect(on_resume_pressed)
+	$%RestartButton2.pressed.connect(on_restart_pressed)
 	$%OptionsButton.pressed.connect(on_options_pressed)
 	$%QuitButton.pressed.connect(on_quit_pressed)
 	
@@ -51,6 +52,10 @@ func on_options_pressed():
 	add_child(options_menu_instance)
 	options_menu_instance.back_pressed.connect(on_options_back_pressed.bind(options_menu_instance))
 	
+
+func on_restart_pressed():
+	get_tree().paused = false
+	get_tree().reload_current_scene()
 	
 func on_quit_pressed():
 	get_tree().paused = false

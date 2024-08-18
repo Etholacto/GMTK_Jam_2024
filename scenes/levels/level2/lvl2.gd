@@ -2,8 +2,10 @@ extends Node
 
 @export var end_screen_scene: PackedScene
 @export var victory_area: VictoryArea
+@export var timer: CanvasLayer
 
 var pause_menu_scene = preload("res://scenes/ui/pause_menu.tscn")
+var level_3_scene = preload("res://scenes/levels/level3/lvl3.tscn")
 
 
 func _ready():
@@ -22,9 +24,12 @@ func on_player_died(defeat_type: String):
 	end_screen_instance.set_defeat(defeat_type)
 
 func on_area_entered(other_area: Area2D):
-	print("victory")
 	if not other_area is HitboxComponent:
 		return
 	
 	var end_screen_instance = end_screen_scene.instantiate()
 	add_child(end_screen_instance)
+	end_screen_instance.set_next_level(level_3_scene)
+	
+	var time = timer.get_elapsed_time()
+	end_screen_instance.set_elapsed_time(time)
