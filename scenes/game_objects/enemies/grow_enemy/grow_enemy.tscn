@@ -1,10 +1,56 @@
-[gd_scene load_steps=8 format=3 uid="uid://dftwkb1mjfav5"]
+[gd_scene load_steps=11 format=3 uid="uid://dftwkb1mjfav5"]
 
 [ext_resource type="Script" path="res://scenes/game_objects/enemies/grow_enemy/grow_enemy.gd" id="1_2chx3"]
 [ext_resource type="Texture2D" uid="uid://bi00nkvh86kxq" path="res://scenes/game_objects/enemies/grow_enemy/grow_enemy.png" id="1_qk7nj"]
 [ext_resource type="PackedScene" uid="uid://cbeccdmhmd036" path="res://scenes/components/health_component.tscn" id="2_gv6bi"]
+[ext_resource type="Animation" uid="uid://yuurjiomf5o6" path="res://resources/enemy_animation/float.res" id="2_hxe57"]
 [ext_resource type="PackedScene" uid="uid://dnuv14ve06frl" path="res://scenes/components/size_change_component.tscn" id="3_5k0ll"]
 [ext_resource type="PackedScene" uid="uid://drgw7r5qw8odk" path="res://scenes/components/hurtbox_component.tscn" id="3_d6acn"]
+
+[sub_resource type="Animation" id="Animation_r4a77"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -8)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:skew")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xud8g"]
+_data = {
+"RESET": SubResource("Animation_r4a77"),
+"float": ExtResource("2_hxe57")
+}
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_decmf"]
 radius = 9.0
@@ -17,11 +63,19 @@ collision_layer = 8
 collision_mask = 9
 script = ExtResource("1_2chx3")
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_xud8g")
+}
+
 [node name="HealthComponent" parent="." instance=ExtResource("2_gv6bi")]
 
 [node name="SizeChangeComponent" parent="." node_paths=PackedStringArray("health_component", "body") instance=ExtResource("3_5k0ll")]
 health_component = NodePath("../HealthComponent")
 body = NodePath("..")
+
+[node name="AnimationTimer" type="Timer" parent="."]
+one_shot = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(1, 0, 1, 1)
@@ -29,6 +83,7 @@ position = Vector2(0, -8)
 texture = ExtResource("1_qk7nj")
 
 [node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("3_d6acn")]
+visible = false
 collision_layer = 0
 collision_mask = 4
 health_component = NodePath("../HealthComponent")
@@ -38,5 +93,6 @@ position = Vector2(0, -7)
 shape = SubResource("CircleShape2D_decmf")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, -7)
 shape = SubResource("CircleShape2D_x7dhd")

@@ -20,3 +20,6 @@ enemy_health = null
 rotation = -0.00751866
 script = ExtResource("1_a2h0w")
 enemy_path = NodePath("..")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true

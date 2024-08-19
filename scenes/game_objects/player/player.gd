@@ -13,6 +13,7 @@ const FALL_GRAVITY := 1500
 @onready var start_scale: Vector2 = -visuals.scale
 @onready var grow_audio_player = $GrowAudioPlayer
 @onready var shrink_audio_player = $ShrinkAudioPlayer
+@onready var animation_player = $AnimationPlayer
 
 var jump_height := -400
 var jump_speed := 130
@@ -28,6 +29,13 @@ func _process(delta):
 	player_movement(delta)
 	if global_position.y > 1000:
 		health_component.damage(1000, true)
+		
+	if velocity.x != 0 and velocity.y == 0:
+		animation_player.play("walk")
+	elif !is_on_floor():
+		$Visuals/Sprite2D.texture = load("res://scenes/game_objects/player/player_action.png")
+	else:
+		animation_player.stop()
 
 
 func player_movement(delta):
