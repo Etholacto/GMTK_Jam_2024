@@ -12,6 +12,7 @@ func _ready():
 	tween.tween_property(panel_container, "scale", Vector2.ONE, .3).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
 	
 	get_tree().paused = true
+	
 	$%RestartButton.pressed.connect(on_restart_button_pressed)
 	$%NextLevelButton.pressed.connect(on_next_level_pressed)
 	$%QuitButton.pressed.connect(on_quit_button_pressed)
@@ -40,6 +41,11 @@ func play_jingle(defeat: bool =false):
 
 func set_next_level(next_level_scene: PackedScene):
 	next_level = next_level_scene
+
+	if next_level.resource_path == "res://scenes/ui/end_screen.tscn":
+		$%NextLevelButton.visible = false
+	else:
+		$%NextLevelButton.visible = true
 	
 	
 func set_elapsed_time(time: float):

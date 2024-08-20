@@ -28,7 +28,7 @@ func _ready():
 func _process(delta):
 	player_movement(delta)
 	if global_position.y > 1000:
-		health_component.damage(1000, true)
+		health_component.damage(100, true)
 		
 	if velocity.x != 0 and velocity.y == 0:
 		animation_player.play("walk")
@@ -94,15 +94,15 @@ func on_enemy_hit(enemy_health: HealthComponent, enemy_type: String):
 			grow_audio_player.play()
 			change_jump_to_size("grow")
 		if enemy_type == "shrink_type_enemy":
-			health_component.damage(1, false)
+			health_component.damage(1)
 			shrink_audio_player.play()
 			change_jump_to_size("shrink")
 		size_change_component.change_size()
-		enemy_health.damage(100, false)
+		enemy_health.damage(100)
 		hit_interval_timer.start()
 	
 	if enemy_health.current_health > health_component.current_health:
-		health_component.damage(100, false)
+		health_component.damage(100)
 
 
 func on_timer_timeout():

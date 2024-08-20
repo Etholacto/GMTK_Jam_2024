@@ -34,4 +34,3 @@ func zoom_camera_on_size_change(_enemy_health: HealthComponent, enemy_type: Stri
 		zoom += Vector2(-0.2, -0.2)
 	if enemy_type == "shrink_type_enemy" and !zoom.is_equal_approx(Vector2(1, 1)):
 		zoom += Vector2(0.2, 0.2)
-	print(str(zoom))

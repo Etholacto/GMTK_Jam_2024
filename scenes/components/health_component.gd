@@ -11,7 +11,7 @@ var enemy_type
 func _ready():
 	current_health = max_health
 
-func damage(hitpoints: float, fall: bool):
+func damage(hitpoints: float, fall: bool = false):
 	current_health = max(current_health - hitpoints, 0)
 	Callable(check_death.bind(fall)).call_deferred()
 	
@@ -20,14 +20,14 @@ func healing(healthpoints: float):
 	Callable(check_death).call_deferred()
 	
 
-func check_death(fall: bool):
+func check_death(fall: bool = false):
 	if fall:
 		died.emit("fall")
 		owner.queue_free()
 	elif current_health == 0:
 		died.emit("too_small")
 		owner.queue_free()
-	if current_health == 10:
+	elif current_health == 9:
 		died.emit("too_big")
 		owner.queue_free()
 	

@@ -13,6 +13,7 @@ func _ready():
 	level_1_button.pressed.connect(on_level_1_pressed)
 	level_2_button.pressed.connect(on_level_2_pressed)
 	level_3_button.pressed.connect(on_level_3_pressed)
+	level_4_button.pressed.connect(on_level_4_pressed)
 
 
 func on_back_pressed():
@@ -29,3 +30,7 @@ func on_level_2_pressed():
 	
 func on_level_3_pressed():
 	get_tree().change_scene_to_file("res://scenes/levels/level3/lvl3.tscn")
+	
+
+func on_level_4_pressed():
+	get_tree().change_scene_to_file("res://scenes/levels/level4/lvl4.tscn")

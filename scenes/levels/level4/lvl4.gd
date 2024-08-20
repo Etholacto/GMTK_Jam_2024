@@ -5,7 +5,7 @@ extends Node
 @export var timer: CanvasLayer
 
 var pause_menu_scene = preload("res://scenes/ui/pause_menu.tscn")
-var level_4_scene = preload("res://scenes/levels/level4/lvl4.tscn")
+var level_4_scene = preload("res://scenes/ui/end_screen.tscn")
 
 
 func _ready():
@@ -22,6 +22,7 @@ func on_player_died(defeat_type: String):
 	var end_screen_instance = end_screen_scene.instantiate()
 	add_child(end_screen_instance)
 	end_screen_instance.set_defeat(defeat_type)
+
 
 func on_area_entered(other_area: Area2D):
 	if not other_area is HitboxComponent:

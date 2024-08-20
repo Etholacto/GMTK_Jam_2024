@@ -83,7 +83,6 @@ position = Vector2(0, -8)
 texture = ExtResource("1_qk7nj")
 
 [node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("3_d6acn")]
-visible = false
 collision_layer = 0
 collision_mask = 4
 health_component = NodePath("../HealthComponent")
@@ -93,6 +92,5 @@ position = Vector2(0, -7)
 shape = SubResource("CircleShape2D_decmf")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(0, -7)
 shape = SubResource("CircleShape2D_x7dhd")
